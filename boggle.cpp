@@ -95,12 +95,31 @@ bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>
 								   std::string word, std::set<std::string>& result, unsigned int r, unsigned int c, int dr, int dc)
 {
 //add your solution here!
-    //Check if tile is valid
 
-    //Set tile to checked
+	if(r >= board.size() || c >= board.size() || c < 0 || r < 0)
+	{
+		return false;
+	}
 
-    // 
+	if(prefix.find(word) == prefix.end()) //not found in prefix
+	{
+		return false;
+	}
 
+	word += board[r][c];
 
+	if(boggleHelper(dict, prefix, board, word, result, r + dr, c + dc, dr, dc))
+	{
+      return true;
+  }
+  else{
+      if(dict.find(word) != dict.end()) //if found
+		  {
+			    result.insert(word);
+          return true;
+		  }
+      return false;
+  }
 
 }
+
